@@ -13,7 +13,9 @@ setup(
         "Django~=4.0.4",
         "djangorestframework~=3.13.1",
         "psycopg2~=2.9.3",
-        "pyxdg~=0.27"
+        "pyxdg~=0.27",
+        "dj-database-url~=0.5.0",
+        "gunicorn~=20.1.0"
     ],
     python_requires='>=3.8',
     entry_points={

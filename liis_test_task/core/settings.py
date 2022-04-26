@@ -143,13 +143,27 @@ from django.core.exceptions import ImproperlyConfigured
 
 settings_file_name = BaseDirectory.load_first_config("liis_test_task", "settings.json")
 if not settings_file_name:
-    raise ImproperlyConfigured("Configuraion file not found.")
+    import os
+    import dj_database_url
 
-try:
-    with open(settings_file_name) as settings_file:
-        locals().update(json.load(settings_file))
-except Exception:
-    raise ImproperlyConfigured("Error while reading configuration file {}.".format(settings_file_name))
+    config_string = os.environ.get("JSON_CONFIG")
+    database_url = os.environ.get("DATABASE_URL")
+    if not config_string or not database_url:
+        raise ImproperlyConfigured("Configuration file not found. Config Vars are not set too.")
+    try:
+        locals().update(json.loads(config_string))
+    except Exception as exc:
+        raise ImproperlyConfigured("Error while reading configuration from JSON_CONFIG") from exc
+    try:
+        DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600)
+    except Exception as exc:
+        raise ImproperlyConfigured("Error while reading configuration from DATABASE_URL") from exc
+else:
+    try:
+        with open(settings_file_name) as settings_file:
+            locals().update(json.load(settings_file))
+    except Exception as exc:
+        raise ImproperlyConfigured("Error while reading configuration file {}.".format(settings_file_name)) from exc
 
 # Debug settings
 
