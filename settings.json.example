@@ -1,0 +1,23 @@
+{
+  "DEBUG": true,
+  "ALLOWED_HOSTS": [
+    "127.0.0.1"
+  ],
+  "DATABASES": {
+    "default": {
+      "ENGINE": "django.db.backends.postgresql",
+      "NAME": "db_name",
+      "USER": "db_user",
+      "PASSWORD": "db_password",
+      "HOST": "localhost",
+      "PORT": "5432",
+      "TEST": {
+        "NAME": "test_db_name",
+        "USER": "test_db_user",
+        "PASSWORD": "test_db_password",
+        "HOST": "localhost",
+        "PORT": "5432"
+      }
+    }
+  }
+}
