@@ -1,8 +1,10 @@
 {
-  "DEBUG": true,
+  "DEBUG": false,
   "ALLOWED_HOSTS": [
-    "127.0.0.1"
+    "hostname"
   ],
+  "FIXTURE_DIRS": [],
+  "SECRET_KEY": "your key",
   "DATABASES": {
     "default": {
       "ENGINE": "django.db.backends.postgresql",
