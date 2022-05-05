@@ -155,7 +155,7 @@ if not settings_file_name:
     except Exception as exc:
         raise ImproperlyConfigured("Error while reading configuration from JSON_CONFIG") from exc
     try:
-        DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600)
+        DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600, ssl_require=True)
     except Exception as exc:
         raise ImproperlyConfigured("Error while reading configuration from DATABASE_URL") from exc
 else:
